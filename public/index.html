@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatima Uzzehra Portfolio</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #ddd;
+        }
+
+        h1 { color: #553c9a; }
+
+        p { color: #444; }
+
+        #status { color: #777; }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Fatima Uzzehra</h1>
+        <h2>My Portfolio</h2>
+
+        <p id="status">Loading user information...</p>
+
+        <div id="user"></div>
+    </div>
+
+    <script>
+        async function loadUser() {
+            const status = document.getElementById('status');
+            const userDiv = document.getElementById('user');
+
+            try {
+                const response = await fetch('/api/users');
+
+                if (!response.ok) {
+                    throw new Error('Unable to load user data');
+                }
+
+                const result = await response.json();
+
+                status.textContent = 'User information loaded!';
+
+                userDiv.innerHTML = `
+                    <p><b>Name:</b> ${result.user.name}</p>
+                    <p><b>Email:</b> ${result.user.email}</p>
+                    <p><b>City:</b> ${result.user.address.city}</p>
+                    <p><b>Company:</b> ${result.user.company.name}</p>
+                `;
+
+            } catch (error) {
+                status.textContent = 'Failed to load data. Please refresh.';
+                console.error(error);
+            }
+        }
+
+        loadUser();
+    </script>
+
+</body>
+</html>
