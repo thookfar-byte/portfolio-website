@@ -1,6 +1,9 @@
+
 {
-  "name": "portfolio_deploy",
-  "lockfileVersion": 3,
-  "requires": true,
-  "packages": {}
+  "name": "portfolio-deploy",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
 }
